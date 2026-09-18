@@ -39,3 +39,10 @@ export type CheckoutFormData = {
   cardExpiry: string;
   cardCvc: string;
 };
+
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  page: number;
+  totalPages: number;
+};

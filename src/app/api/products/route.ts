@@ -6,21 +6,30 @@ export const GET = async (request: Request) => {
   const category = searchParams.get('category');
   const search = searchParams.get('search');
   const sort = searchParams.get('sort');
+  const minPrice = searchParams.get('minPrice');
+  const maxPrice = searchParams.get('maxPrice');
   const page = parseInt(searchParams.get('page') || '1', 10);
-  const limit = parseInt(searchParams.get('limit') || '10', 10);
+  const limit = parseInt(searchParams.get('limit') || '12', 10);
 
   let filtered = [...products];
+
+  if (search) {
+    const q = search.toLowerCase();
+    filtered = filtered.filter(
+      (p) => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q),
+    );
+  }
 
   if (category) {
     filtered = filtered.filter((p) => p.category === category);
   }
 
-  if (search) {
-    filtered = filtered.filter(
-      (p) =>
-        p.title.toLowerCase().includes(search.toLowerCase()) ||
-        p.description.toLowerCase().includes(search.toLowerCase()),
-    );
+  if (minPrice) {
+    filtered = filtered.filter((p) => p.price >= parseFloat(minPrice));
+  }
+
+  if (maxPrice) {
+    filtered = filtered.filter((p) => p.price <= parseFloat(maxPrice));
   }
 
   if (sort === 'price-asc') {
