@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import cartReducer from '@/lib/store/cart-store';
 
 const rootReducer = combineReducers({
-  _placeholder: (state = null) => state,
+  cart: cartReducer,
 });
 
 export const makeStore = () => {

@@ -106,7 +106,7 @@ function generateProduct(): Product {
     title,
     description: faker.commerce.productDescription(),
     category,
-    price: parseFloat(faker.commerce.price({ min: 1, max: 999, decimals: 2 })),
+    price: parseFloat(faker.commerce.price({ min: 1, max: 999, dec: 2 })),
     rating,
     reviewCount,
     stock: faker.number.int({ min: 0, max: 1000 }),
