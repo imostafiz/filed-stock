@@ -17,7 +17,6 @@ type ProductsPageProps = {
 const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
   const params = await searchParams;
   const search = typeof params.search === 'string' ? params.search : undefined;
-  const category = typeof params.category === 'string' ? params.category : undefined;
   const categories = typeof params.categories === 'string' ? params.categories : undefined;
   const sort = typeof params.sort === 'string' ? params.sort : undefined;
   const page = typeof params.page === 'string' ? params.page : undefined;
@@ -26,7 +25,6 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
 
   const { products, total, totalPages } = getProductsServer({
     search,
-    category,
     categories,
     sort,
     page,
@@ -38,23 +36,22 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
 
   return (
     <div className="min-h-screen bg-[#F3F1EC]">
-      <div className="mx-auto max-w-7xl px-4 pt-6 pb-16 sm:px-6 lg:px-8">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex-1">
-            <SearchBox />
+      <div className="sticky top-0 z-30 bg-[#F3F1EC]">
+        <div className="mx-auto max-w-7xl px-4 pt-6 pb-4 sm:px-6 lg:px-8">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="flex-1">
+              <SearchBox />
+            </div>
+            <CartButton />
           </div>
-          <CartButton />
-        </div>
 
-        <div className="mb-2">
-          <CategoryChips categories={allCategories} />
+          <div className="mb-2">
+            <CategoryChips categories={allCategories} />
+          </div>
         </div>
+      </div>
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#1A2332]">Shop Our Collection</h1>
-          <p className="mt-1 text-gray-500">Discover quality products at great prices</p>
-        </div>
-
+      <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <div className="flex gap-8">
           <FilterSidebar categories={allCategories} />
 
@@ -83,7 +80,13 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
 
 const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
   return (
-    <Suspense fallback={<div className="flex min-h-[50vh] items-center justify-center bg-[#F3F1EC] text-gray-500">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex min-h-[50vh] items-center justify-center bg-[#F3F1EC] text-gray-500">
+          Loading...
+        </div>
+      }
+    >
       <ProductsContent searchParams={searchParams} />
     </Suspense>
   );

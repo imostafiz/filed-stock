@@ -60,11 +60,6 @@ const CategoryCheckboxes = ({ categories }: CategoryCheckboxesProps) => {
             />
             <span className="text-base leading-none">{CATEGORY_ICONS[cat] || '📦'}</span>
             <span className="text-[#1A2332]">{cat}</span>
-            {selected.includes(cat) && (
-              <span className="ml-auto h-5 w-5 rounded-full bg-[#1A2332] text-[10px] font-bold leading-5 text-center text-white">
-                {selected.filter((c) => c === cat).length}
-              </span>
-            )}
           </label>
         ))}
       </div>
