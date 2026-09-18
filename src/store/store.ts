@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
+const rootReducer = combineReducers({
+  _placeholder: (state = null) => state,
+});
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: rootReducer,
   });
 };
 
