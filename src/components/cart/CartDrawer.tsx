@@ -1,10 +1,18 @@
 'use client';
 
 import { useMemo } from 'react';
+import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { useAppSelector } from '@/store/hooks';
 import CartItem from './CartItem';
 import { formatPrice } from '@/lib/utils';
+
+const useIsClient = () =>
+  useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
 type CartDrawerProps = {
   open: boolean;
@@ -13,6 +21,7 @@ type CartDrawerProps = {
 
 const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
   const items = useAppSelector((state) => state.cart.items);
+  const isClient = useIsClient();
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = useMemo(
     () => items.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
@@ -32,7 +41,9 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
       >
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
           <h2 className="text-lg font-semibold text-[#1A2332]">
-            Your Cart ({totalItems} item{totalItems !== 1 ? 's' : ''})
+            {isClient
+              ? `Your Cart (${totalItems} item${totalItems !== 1 ? 's' : ''})`
+              : 'Your Cart'}
           </h2>
           <button
             onClick={onClose}
@@ -52,7 +63,7 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-4">
-          {items.length === 0 ? (
+          {!isClient || items.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <div className="mb-4 text-5xl text-gray-300">🛒</div>
               <p className="mb-4 text-sm text-gray-500">Your cart is empty</p>
@@ -73,7 +84,7 @@ const CartDrawer = ({ open, onClose }: CartDrawerProps) => {
           )}
         </div>
 
-        {items.length > 0 && (
+        {isClient && items.length > 0 && (
           <div className="border-t border-gray-200 px-6 py-4">
             <div className="mb-4 flex items-center justify-between">
               <span className="text-sm text-gray-500">Subtotal</span>

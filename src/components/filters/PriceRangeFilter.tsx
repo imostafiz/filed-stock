@@ -26,29 +26,31 @@ const PriceRangeFilter = () => {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <input
-        type="number"
-        placeholder="Min"
-        value={min}
-        onChange={(e) => setMin(e.target.value)}
-        className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm"
-        min="0"
-      />
-      <span className="text-gray-500">–</span>
-      <input
-        type="number"
-        placeholder="Max"
-        value={max}
-        onChange={(e) => setMax(e.target.value)}
-        className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm"
-        min="0"
-      />
+    <div className="space-y-2">
+      <div className="flex items-center gap-2">
+        <input
+          type="number"
+          placeholder="Min"
+          value={min}
+          onChange={(e) => setMin(e.target.value)}
+          className="w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm text-[#1A2332] transition-colors hover:border-gray-300 focus:border-[#1A2332] focus:outline-none focus:ring-1 focus:ring-[#1A2332]/20"
+          min="0"
+        />
+        <span className="text-gray-400">–</span>
+        <input
+          type="number"
+          placeholder="Max"
+          value={max}
+          onChange={(e) => setMax(e.target.value)}
+          className="w-full rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm text-[#1A2332] transition-colors hover:border-gray-300 focus:border-[#1A2332] focus:outline-none focus:ring-1 focus:ring-[#1A2332]/20"
+          min="0"
+        />
+      </div>
       <button
         onClick={handleApply}
-        className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+        className="w-full rounded-lg bg-[#1A2332] px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-[#253448]"
       >
-        Go
+        Apply
       </button>
     </div>
   );
