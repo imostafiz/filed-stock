@@ -6,6 +6,11 @@ export type Review = {
   date: string;
 };
 
+export type Spec = {
+  label: string;
+  value: string;
+};
+
 export type Product = {
   id: string;
   slug: string;
@@ -19,6 +24,7 @@ export type Product = {
   images: string[];
   reviews: Review[];
   tags: string[];
+  specs: Spec[];
 };
 
 export type CartItem = {
@@ -33,9 +39,13 @@ export type CheckoutFormData = {
   phone: string;
   address: string;
   city: string;
-  state: string;
   zipCode: string;
-  cardNumber: string;
-  cardExpiry: string;
-  cardCvc: string;
+  paymentMethod: 'credit-card' | 'debit-card' | 'cod';
+};
+
+export type ProductsResponse = {
+  products: Product[];
+  total: number;
+  page: number;
+  totalPages: number;
 };
