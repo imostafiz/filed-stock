@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import Link from 'next/link';
 import { getProductsServer, getCategories } from '@/lib/api/products';
 import ProductGrid from '@/components/product/ProductGrid';
 import FilterSidebar from '@/components/filters/FilterSidebar';
@@ -38,7 +39,11 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
     <div className="min-h-screen bg-[#F3F1EC]">
       <div className="sticky top-0 z-30 bg-[#F3F1EC]">
         <div className="mx-auto max-w-7xl px-4 pt-6 pb-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-4 flex items-center gap-4">
+            <Link href="/" className="hidden shrink-0 items-center gap-1.5 sm:flex">
+              <span className="text-xl font-bold text-[#1A2332]">Field</span>
+              <span className="text-xl font-bold text-[#C15F3C]">Stock</span>
+            </Link>
             <div className="flex-1">
               <SearchBox />
             </div>
