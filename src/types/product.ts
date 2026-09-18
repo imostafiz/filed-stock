@@ -6,6 +6,11 @@ export type Review = {
   date: string;
 };
 
+export type Spec = {
+  label: string;
+  value: string;
+};
+
 export type Product = {
   id: string;
   slug: string;
@@ -19,6 +24,7 @@ export type Product = {
   images: string[];
   reviews: Review[];
   tags: string[];
+  specs: Spec[];
 };
 
 export type CartItem = {
