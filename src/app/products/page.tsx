@@ -55,7 +55,7 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
         <div className="flex gap-8">
           <FilterSidebar categories={allCategories} />
 
-          <main className="flex-1">
+          <main className="min-w-0 flex-1">
             <div className="mb-4 flex items-center justify-between">
               <span className="text-sm text-gray-500">
                 {total} result{total !== 1 ? 's' : ''}
