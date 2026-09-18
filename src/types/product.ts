@@ -33,11 +33,8 @@ export type CheckoutFormData = {
   phone: string;
   address: string;
   city: string;
-  state: string;
   zipCode: string;
-  cardNumber: string;
-  cardExpiry: string;
-  cardCvc: string;
+  paymentMethod: 'credit-card' | 'debit-card' | 'cod';
 };
 
 export type ProductsResponse = {

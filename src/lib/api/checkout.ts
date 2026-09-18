@@ -1,7 +1,7 @@
-import type { CheckoutFormData } from '@/types/product';
+import type { CartItem, CheckoutFormData } from '@/types/product';
 
 export const createOrder = async (
-  data: CheckoutFormData,
+  data: CheckoutFormData & { items: CartItem[] },
 ): Promise<{ orderId: string; success: boolean }> => {
   const res = await fetch('/api/checkout', {
     method: 'POST',
