@@ -91,3 +91,19 @@ export const getRelatedProducts = async (product: Product): Promise<Product[]> =
     )
     .slice(0, 4);
 };
+
+export const getProductBySlugServer = (slug: string): Product | null => {
+  const products = loadProducts();
+  return products.find((p) => p.slug === slug) || null;
+};
+
+export const getRelatedProductsServer = (product: Product, limit = 4): Product[] => {
+  const products = loadProducts();
+  return products
+    .filter(
+      (p) =>
+        p.id !== product.id &&
+        (p.category === product.category || p.tags.some((t) => product.tags.includes(t))),
+    )
+    .slice(0, limit);
+};
