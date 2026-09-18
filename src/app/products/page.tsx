@@ -3,6 +3,7 @@ import { getProductsServer, getCategories } from '@/lib/api/products';
 import ProductGrid from '@/components/product/ProductGrid';
 import FilterSidebar from '@/components/filters/FilterSidebar';
 import SearchBox from '@/components/filters/SearchBox';
+import CartButton from '@/components/cart/CartButton';
 import Pagination from '@/components/ui/Pagination';
 import EmptyState from '@/components/ui/EmptyState';
 
@@ -32,8 +33,11 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
 
   return (
     <div>
-      <div className="mb-6">
-        <SearchBox />
+      <div className="mb-6 flex items-center gap-3">
+        <div className="flex-1">
+          <SearchBox />
+        </div>
+        <CartButton />
       </div>
 
       <div className="flex flex-col gap-8 lg:flex-row">
