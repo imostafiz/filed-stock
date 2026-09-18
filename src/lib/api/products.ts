@@ -12,6 +12,7 @@ const loadProducts = (): Product[] => {
 export const getProductsServer = (params: {
   search?: string;
   category?: string;
+  categories?: string;
   sort?: string;
   page?: string;
   limit?: string;
@@ -19,7 +20,16 @@ export const getProductsServer = (params: {
   maxPrice?: string;
 }): ProductsResponse => {
   const products = loadProducts();
-  const { search, category, sort, page = '1', limit = '12', minPrice, maxPrice } = params;
+  const {
+    search,
+    category,
+    categories,
+    sort,
+    page = '1',
+    limit = '12',
+    minPrice,
+    maxPrice,
+  } = params;
 
   let filtered = [...products];
 
@@ -30,8 +40,12 @@ export const getProductsServer = (params: {
     );
   }
 
-  if (category) {
-    filtered = filtered.filter((p) => p.category === category);
+  const cats = [
+    ...(category ? [category] : []),
+    ...(categories ? categories.split(',').filter(Boolean) : []),
+  ];
+  if (cats.length > 0) {
+    filtered = filtered.filter((p) => cats.includes(p.category));
   }
 
   if (minPrice) {

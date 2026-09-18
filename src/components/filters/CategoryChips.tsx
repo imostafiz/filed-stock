@@ -11,40 +11,40 @@ const CategoryChips = ({ categories }: CategoryChipsProps) => {
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get('category') || '';
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (cat: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (category === activeCategory) {
+    if (cat === activeCategory) {
       params.delete('category');
     } else {
-      params.set('category', category);
+      params.set('category', cat);
     }
     params.delete('page');
     router.push(`/products?${params.toString()}`);
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="scrollbar-hide flex gap-2 overflow-x-auto pb-1">
       <button
         onClick={() => handleCategoryClick('')}
-        className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+        className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
           activeCategory === ''
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            ? 'bg-[#1A2332] text-white'
+            : 'border border-gray-200 bg-white text-[#1A2332] hover:bg-gray-50'
         }`}
       >
         All
       </button>
-      {categories.map((category) => (
+      {categories.map((cat) => (
         <button
-          key={category}
-          onClick={() => handleCategoryClick(category)}
-          className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-            activeCategory === category
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          key={cat}
+          onClick={() => handleCategoryClick(cat)}
+          className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+            activeCategory === cat
+              ? 'bg-[#1A2332] text-white'
+              : 'border border-gray-200 bg-white text-[#1A2332] hover:bg-gray-50'
           }`}
         >
-          {category}
+          {cat}
         </button>
       ))}
     </div>

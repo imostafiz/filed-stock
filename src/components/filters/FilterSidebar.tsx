@@ -1,8 +1,7 @@
 'use client';
 
-import CategoryChips from './CategoryChips';
+import CategoryCheckboxes from './CategoryCheckboxes';
 import PriceRangeFilter from './PriceRangeFilter';
-import SortSelect from './SortSelect';
 
 type FilterSidebarProps = {
   categories: string[];
@@ -10,20 +9,15 @@ type FilterSidebarProps = {
 
 const FilterSidebar = ({ categories }: FilterSidebarProps) => {
   return (
-    <aside className="space-y-6">
-      <div>
-        <h3 className="mb-2 text-sm font-semibold text-gray-900">Sort By</h3>
-        <SortSelect />
-      </div>
-
-      <div>
-        <h3 className="mb-2 text-sm font-semibold text-gray-900">Category</h3>
-        <CategoryChips categories={categories} />
-      </div>
-
-      <div>
-        <h3 className="mb-2 text-sm font-semibold text-gray-900">Price Range</h3>
-        <PriceRangeFilter />
+    <aside className="hidden w-56 shrink-0 lg:block">
+      <div className="sticky top-4 space-y-6 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
+        <CategoryCheckboxes categories={categories} />
+        <div className="border-t border-gray-100 pt-4">
+          <p className="mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+            Price Range
+          </p>
+          <PriceRangeFilter />
+        </div>
       </div>
     </aside>
   );
