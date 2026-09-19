@@ -23,6 +23,7 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
   const page = typeof params.page === 'string' ? params.page : undefined;
   const minPrice = typeof params.minPrice === 'string' ? params.minPrice : undefined;
   const maxPrice = typeof params.maxPrice === 'string' ? params.maxPrice : undefined;
+  const minRating = typeof params.minRating === 'string' ? params.minRating : undefined;
 
   const { products, total, totalPages } = getProductsServer({
     search,
@@ -31,6 +32,7 @@ const ProductsContent = async ({ searchParams }: ProductsPageProps) => {
     page,
     minPrice,
     maxPrice,
+    minRating,
   });
 
   const allCategories = getCategories();

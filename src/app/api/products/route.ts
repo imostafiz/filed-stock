@@ -8,6 +8,7 @@ export const GET = async (request: Request) => {
   const sort = searchParams.get('sort');
   const minPrice = searchParams.get('minPrice');
   const maxPrice = searchParams.get('maxPrice');
+  const minRating = searchParams.get('minRating');
   const page = parseInt(searchParams.get('page') || '1', 10);
   const limit = parseInt(searchParams.get('limit') || '12', 10);
 
@@ -30,6 +31,10 @@ export const GET = async (request: Request) => {
 
   if (maxPrice) {
     filtered = filtered.filter((p) => p.price <= parseFloat(maxPrice));
+  }
+
+  if (minRating) {
+    filtered = filtered.filter((p) => p.rating >= parseFloat(minRating));
   }
 
   if (sort === 'price-asc') {

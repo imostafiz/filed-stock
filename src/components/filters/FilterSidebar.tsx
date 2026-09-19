@@ -2,6 +2,7 @@
 
 import CategoryCheckboxes from './CategoryCheckboxes';
 import PriceRangeFilter from './PriceRangeFilter';
+import RatingFilter from './RatingFilter';
 
 type FilterSidebarProps = {
   categories: string[];
@@ -17,6 +18,9 @@ const FilterSidebar = ({ categories }: FilterSidebarProps) => {
             Price Range
           </p>
           <PriceRangeFilter />
+        </div>
+        <div className="border-t border-gray-100 pt-4">
+          <RatingFilter />
         </div>
       </div>
     </aside>
