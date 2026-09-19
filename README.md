@@ -18,16 +18,16 @@ A full-stack e-commerce product listing application built with Next.js App Route
 
 ## Tech Stack
 
-| Category | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS v4 |
+| Category         | Technology                  |
+| ---------------- | --------------------------- |
+| Framework        | Next.js 16 (App Router)     |
+| Language         | TypeScript 5                |
+| Styling          | Tailwind CSS v4             |
 | State Management | Redux Toolkit + React-Redux |
-| Form Handling | React Hook Form |
-| Validation | Zod |
-| Data Generation | Faker.js |
-| Linting | ESLint + Prettier |
+| Form Handling    | React Hook Form             |
+| Validation       | Zod                         |
+| Data Generation  | Faker.js                    |
+| Linting          | ESLint + Prettier           |
 
 ## Folder Structure
 
@@ -86,13 +86,13 @@ Open [http://localhost:3000/products](http://localhost:3000/products) to view th
 
 ### Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server (Turbopack) |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format code with Prettier |
+| Command                     | Description                                   |
+| --------------------------- | --------------------------------------------- |
+| `npm run dev`               | Start development server (Turbopack)          |
+| `npm run build`             | Production build                              |
+| `npm run start`             | Start production server                       |
+| `npm run lint`              | Run ESLint                                    |
+| `npm run format`            | Format code with Prettier                     |
 | `npm run generate:products` | Regenerate `data/products.json` with Faker.js |
 
 ## API & Data Fetching Approach
@@ -103,24 +103,24 @@ Product data is stored as a static JSON file (`data/products.json`) containing 5
 
 ### API Routes
 
-| Route | Method | Description |
-|---|---|---|
-| `/api/products` | GET | List products with filtering, sorting, and pagination |
-| `/api/products/[id]` | GET | Get a single product by ID |
-| `/api/checkout` | POST | Submit an order (dummy endpoint) |
+| Route                | Method | Description                                           |
+| -------------------- | ------ | ----------------------------------------------------- |
+| `/api/products`      | GET    | List products with filtering, sorting, and pagination |
+| `/api/products/[id]` | GET    | Get a single product by ID                            |
+| `/api/checkout`      | POST   | Submit an order (dummy endpoint)                      |
 
 ### Query Parameters
 
 The `/api/products` endpoint accepts these query params:
 
-| Param | Type | Example | Description |
-|---|---|---|---|
-| `search` | string | `?search=wireless` | Filter by title/description |
-| `categories` | string | `?categories=Electronics,Clothing` | Comma-separated category filter |
-| `sort` | string | `?sort=price-asc` | Sort: `price-asc`, `price-desc`, `rating` |
-| `page` | string | `?page=2` | Pagination page number |
-| `minPrice` | string | `?minPrice=10` | Minimum price filter |
-| `maxPrice` | string | `?maxPrice=100` | Maximum price filter |
+| Param        | Type   | Example                            | Description                               |
+| ------------ | ------ | ---------------------------------- | ----------------------------------------- |
+| `search`     | string | `?search=wireless`                 | Filter by title/description               |
+| `categories` | string | `?categories=Electronics,Clothing` | Comma-separated category filter           |
+| `sort`       | string | `?sort=price-asc`                  | Sort: `price-asc`, `price-desc`, `rating` |
+| `page`       | string | `?page=2`                          | Pagination page number                    |
+| `minPrice`   | string | `?minPrice=10`                     | Minimum price filter                      |
+| `maxPrice`   | string | `?maxPrice=100`                    | Maximum price filter                      |
 
 ### Service Layer (`lib/api/products.ts`)
 
@@ -137,24 +137,24 @@ This separation exists because Server Components can access the filesystem direc
 
 ### Server Components (default in App Router)
 
-| Component | Why Server |
-|---|---|
-| `app/products/page.tsx` | Fetches products & categories at request time, generates static params for SEO |
-| `app/products/[slug]/page.tsx` | Fetches product data, generates metadata (title, description), pre-renders 496 slugs via `generateStaticParams` |
-| `components/product/ProductGrid.tsx` | Pure presentational — no interactivity, just maps products to cards |
-| `components/product/RelatedProducts.tsx` | Pure presentational — receives data as props |
+| Component                                | Why Server                                                                                                      |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `app/products/page.tsx`                  | Fetches products & categories at request time, generates static params for SEO                                  |
+| `app/products/[slug]/page.tsx`           | Fetches product data, generates metadata (title, description), pre-renders 496 slugs via `generateStaticParams` |
+| `components/product/ProductGrid.tsx`     | Pure presentational — no interactivity, just maps products to cards                                             |
+| `components/product/RelatedProducts.tsx` | Pure presentational — receives data as props                                                                    |
 
 ### Client Components (`'use client'`)
 
-| Component | Why Client |
-|---|---|
-| `components/filters/*` | All filter components read/write URL params via `useRouter()` + `useSearchParams()`, require `onClick`/`onChange` handlers |
-| `components/cart/*` | Dispatch Redux actions (`addToCart`, `removeFromCart`), manage drawer open/close state |
-| `components/checkout/CheckoutForm.tsx` | React Hook Form state, form submission, loading state |
-| `components/product/AddToCartButton.tsx` | Redux dispatch, quantity selector state, "Added!" feedback |
-| `components/product/ImageGallery.tsx` | Selected thumbnail state (`useState`) |
-| `components/product/ProductTabs.tsx` | Active tab state (`useState`) |
-| `components/product/ReviewList.tsx` | Pure presentational but needs client for potential future interactivity |
+| Component                                | Why Client                                                                                                                 |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `components/filters/*`                   | All filter components read/write URL params via `useRouter()` + `useSearchParams()`, require `onClick`/`onChange` handlers |
+| `components/cart/*`                      | Dispatch Redux actions (`addToCart`, `removeFromCart`), manage drawer open/close state                                     |
+| `components/checkout/CheckoutForm.tsx`   | React Hook Form state, form submission, loading state                                                                      |
+| `components/product/AddToCartButton.tsx` | Redux dispatch, quantity selector state, "Added!" feedback                                                                 |
+| `components/product/ImageGallery.tsx`    | Selected thumbnail state (`useState`)                                                                                      |
+| `components/product/ProductTabs.tsx`     | Active tab state (`useState`)                                                                                              |
+| `components/product/ReviewList.tsx`      | Pure presentational but needs client for potential future interactivity                                                    |
 
 **Rule of thumb:** If a component needs `useState`, `useEffect`, event handlers, or browser APIs — it must be a Client Component. Everything else stays as a Server Component for better performance and SEO.
 
@@ -172,10 +172,10 @@ Redux Toolkit was chosen for the cart because:
 ### Cart Slice (`lib/store/cart-store.ts`)
 
 ```ts
-addToCart(product)        // Adds product or increments quantity if exists
-removeFromCart(productId) // Removes item by product ID
-updateQuantity({id, qty}) // Sets specific quantity for an item
-clearCart()               // Empties the cart
+addToCart(product); // Adds product or increments quantity if exists
+removeFromCart(productId); // Removes item by product ID
+updateQuantity({ id, qty }); // Sets specific quantity for an item
+clearCart(); // Empties the cart
 ```
 
 ### Persistence Mechanism
@@ -196,22 +196,20 @@ Cart data survives page refreshes and browser restarts. No `redux-persist` depen
 
 ## Performance Optimizations
 
-| Technique | Where | Why |
-|---|---|---|
-| **`useMemo`** | `CheckoutForm.tsx` — subtotal calculation | Recalculates only when `items` array changes, not on every render |
-| **`useCallback`** | `CategoryChips.tsx` — `checkScroll` function | Prevents unnecessary re-creation of the scroll listener callback on every render |
-| **`generateStaticParams`** | `app/products/[slug]/page.tsx` | Pre-renders 496 product pages at build time (SSG), reducing server load |
-| **Server Components** | Product listing, product detail pages | Data fetching happens on the server — no client-side waterfalls, smaller JavaScript bundle |
-| **`next/image`** | Product images, cart item thumbnails | Automatic image optimization, lazy loading, responsive `sizes` attribute |
-| **URL-based filter state** | All filter components | No client-side state management for filters — the URL is the single source of truth, enabling SSR and shareable links |
-| **Conditional rendering** | `Pagination` — `if (totalPages <= 1) return null` | Avoids rendering unnecessary DOM nodes |
-| **`isClient` guard** | `CartButton`, `CartDrawer` | Prevents hydration mismatches by deferring localStorage-dependent rendering to client |
+| Technique                  | Where                                             | Why                                                                                                                   |
+| -------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **`useMemo`**              | `CheckoutForm.tsx` — subtotal calculation         | Recalculates only when `items` array changes, not on every render                                                     |
+| **`useCallback`**          | `CategoryChips.tsx` — `checkScroll` function      | Prevents unnecessary re-creation of the scroll listener callback on every render                                      |
+| **`generateStaticParams`** | `app/products/[slug]/page.tsx`                    | Pre-renders 496 product pages at build time (SSG), reducing server load                                               |
+| **Server Components**      | Product listing, product detail pages             | Data fetching happens on the server — no client-side waterfalls, smaller JavaScript bundle                            |
+| **`next/image`**           | Product images, cart item thumbnails              | Automatic image optimization, lazy loading, responsive `sizes` attribute                                              |
+| **URL-based filter state** | All filter components                             | No client-side state management for filters — the URL is the single source of truth, enabling SSR and shareable links |
+| **Conditional rendering**  | `Pagination` — `if (totalPages <= 1) return null` | Avoids rendering unnecessary DOM nodes                                                                                |
+| **`isClient` guard**       | `CartButton`, `CartDrawer`                        | Prevents hydration mismatches by deferring localStorage-dependent rendering to client                                 |
 
 ## Demo
 
-> 🎥 Demo video coming soon.
-
-[Live Demo](#) — *placeholder*
+[Live Demo](https://field-stock-sigma.vercel.app/)
 
 ## Known Limitations & Future Improvements
 
