@@ -18,6 +18,7 @@ export const getProductsServer = (params: {
   limit?: string;
   minPrice?: string;
   maxPrice?: string;
+  minRating?: string;
 }): ProductsResponse => {
   const products = loadProducts();
   const {
@@ -29,6 +30,7 @@ export const getProductsServer = (params: {
     limit = '12',
     minPrice,
     maxPrice,
+    minRating,
   } = params;
 
   let filtered = [...products];
@@ -54,6 +56,10 @@ export const getProductsServer = (params: {
 
   if (maxPrice) {
     filtered = filtered.filter((p) => p.price <= parseFloat(maxPrice));
+  }
+
+  if (minRating) {
+    filtered = filtered.filter((p) => p.rating >= parseFloat(minRating));
   }
 
   if (sort === 'price-asc') {

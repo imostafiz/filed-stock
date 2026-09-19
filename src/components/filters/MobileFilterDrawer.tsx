@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import CategoryCheckboxes from './CategoryCheckboxes';
 import PriceRangeFilter from './PriceRangeFilter';
+import RatingFilter from './RatingFilter';
 
 type MobileFilterDrawerProps = {
   categories: string[];
@@ -64,6 +65,9 @@ const MobileFilterDrawer = ({ categories }: MobileFilterDrawerProps) => {
                   Price Range
                 </p>
                 <PriceRangeFilter />
+              </div>
+              <div className="border-t border-gray-100 pt-4">
+                <RatingFilter />
               </div>
             </div>
           </div>
