@@ -46,7 +46,7 @@ A full-stack e-commerce product listing application built with Next.js App Route
 │   │   └── checkout/              # Checkout form & success page
 │   ├── components/
 │   │   ├── product/               # ProductCard, ProductGrid, ImageGallery, AddToCartButton, ReviewList, RelatedProducts, ProductTabs
-│   │   ├── filters/               # SearchBox, CategoryChips, CategoryCheckboxes, FilterSidebar, SortSelect, PriceRangeFilter, MobileFilterDrawer
+│   │   ├── filters/               # SearchBox, CategoryChips, CategoryCheckboxes, FilterSidebar, SortSelect, PriceRangeFilter, RatingFilter, MobileFilterDrawer
 │   │   ├── cart/                  # CartButton, CartDrawer, CartItem, CartSummary
 │   │   ├── checkout/              # CheckoutForm
 │   │   └── ui/                    # Pagination, EmptyState, ErrorState, LoadingSkeleton
@@ -121,6 +121,7 @@ The `/api/products` endpoint accepts these query params:
 | `page`       | string | `?page=2`                          | Pagination page number                    |
 | `minPrice`   | string | `?minPrice=10`                     | Minimum price filter                      |
 | `maxPrice`   | string | `?maxPrice=100`                    | Maximum price filter                      |
+| `minRating`  | string | `?minRating=4`                     | Minimum product rating filter             |
 
 ### Service Layer (`lib/api/products.ts`)
 
