@@ -25,6 +25,14 @@ const SearchBox = () => {
     }
   };
 
+  const handleClear = () => {
+    setQuery('');
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('search');
+    params.delete('page');
+    router.push(`/products?${params.toString()}`);
+  };
+
   return (
     <div className="flex items-center gap-2">
       <div className="relative flex-1">
@@ -47,10 +55,29 @@ const SearchBox = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full rounded-full border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-[#1A2332] transition-colors placeholder:text-gray-400 hover:border-gray-300 focus:border-[#1A2332] focus:outline-none focus:ring-1 focus:ring-[#1A2332]/20"
+          className="w-full rounded-full border border-gray-200 bg-white py-2.5 pr-10 pl-10 text-sm text-[#1A2332] transition-colors placeholder:text-gray-400 hover:border-gray-300 focus:border-[#1A2332] focus:outline-none focus:ring-1 focus:ring-[#1A2332]/20"
         />
+        {query && (
+          <button
+            type="button"
+            onClick={handleClear}
+            aria-label="Clear search"
+            className="absolute right-3 top-1/2 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+          >
+            <svg
+              className="h-3.5 w-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
       </div>
       <button
+        type="button"
         onClick={handleSearch}
         className="rounded-full bg-[#1A2332] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#253448] hover:shadow-md"
       >
